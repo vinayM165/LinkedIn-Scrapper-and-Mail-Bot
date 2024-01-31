@@ -3,11 +3,9 @@ package gmail;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ProcessingDetails {
-
-	public ProcessingDetails() {
+	public ProcessingDetails(){
 		// TODO Auto-generated constructor stub
 	}
-	
 	// Create a flag to signal when the code has finished executing
 	AtomicBoolean isDone = new AtomicBoolean(false);
 	Thread processingThread;
@@ -23,7 +21,6 @@ public class ProcessingDetails {
 	        }
 	    }
 	});
-
 	// Start the processing thread
 	processingThread.start();
 	}

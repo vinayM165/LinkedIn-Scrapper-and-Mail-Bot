@@ -22,7 +22,7 @@ public class EmailSender {
 	        
 	        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("mandgevinay16@gmail.com","ajsuphrgcarygemb");
+	                return new PasswordAuthentication("email-id@gmail.com","*Gmail API Passkey*"); //Activate and paste gmail-api passkey
 	            }
 	        });
 	        
@@ -32,7 +32,7 @@ public class EmailSender {
 	            message.setSubject(sub);
 	           
 	            	MimeBodyPart attachmentPart = new MimeBodyPart();
-	            attachmentPart.attachFile(new File("C:\\Users\\VMANDGE\\Desktop\\Vinay Mandge_Aug_2023.pdf"));
+	            attachmentPart.attachFile(new File("path")); //path to attachment i.e. resume/cover letter
 	            Multipart multipart = new MimeMultipart();
 	            message.setContent(multipart);
 	            MimeBodyPart messageBodyPart = new MimeBodyPart();

@@ -44,16 +44,16 @@ public class MainBot {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Pattern emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}");
        
-        //		driver.get("https://www.linkedin.com/login");
-       //       WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
-       //       emailInput.sendKeys("mandgevinay16@gmail.com");
-       //       WebElement nextButton = driver.findElement(By.id("identifierNext"));
-       //       nextButton.click();
-       //       WebElement passwordInput = driver.findElement(By.id("password"));
-       //       passwordInput.sendKeys("vkshimpi16599");
-       //       WebElement signInButton = driver.findElement(By.xpath("//button[@type='submit']"));
-       //       signInButton.click();
-      
+        driver.get("https://www.linkedin.com/login");
+        WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+        emailInput.sendKeys("Enter your email ID");
+        WebElement nextButton = driver.findElement(By.id("identifierNext"));
+        nextButton.click();
+        WebElement passwordInput = driver.findElement(By.id("password"));
+        passwordInput.sendKeys("Enter password");
+        WebElement signInButton = driver.findElement(By.xpath("//button[@type='submit']"));
+        signInButton.click();
+
         for(String searchKey : searchWords) {
         driver.get("https://www.linkedin.com/search/results/content/");
         WebElement searchBox = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("search-global-typeahead__input")));
@@ -64,61 +64,61 @@ public class MainBot {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-	
-	    //scroll down Page to get more results
+
+        //scroll down Page to get more results
         //more value of 2nd parameter more data
-        scrollDownPage(js,30);
-        
-        
+        scrollDownPage(js,60);
+
+
         List<WebElement> posts = driver.findElements(By.className("break-words"));
         // Create a pattern to match email addresses
         // Iterate over each post and check for email addresses in the post description
         for (WebElement post : posts) {
-           // WebElement descriptionElement = post.findElement(By.className("feed-shared-update-v2__description"));
+            // WebElement descriptionElement = post.findElement(By.className("feed-shared-update-v2__description"));
             String descriptionText = post.getText();
             //System.out.println(descriptionText);
             Matcher matcher = emailPattern.matcher(descriptionText);
             while (matcher.find()) {
                 String email = matcher.group();
                 Emailset.add(email);
-            	}
-        	}
-        
+                }
+            }
+
         List<WebElement> links = driver.findElements(By.xpath("//a[not(contains(@href, 'linkedin.com')) and not(starts-with(@href, '#'))]"));
-	        for (WebElement link : links) {
-	            String url = link.getAttribute("href");
-	            if(url.contains("feed") || url.contains("hashtag"))
-	            	continue;
-	            if (url.contains("mailto:")) {
-	            	url = url.replace("mailto:","");
-	                Emailset.add(url);
-	            } else {
-	                URLset.add(url);
-	            }
-	        }
+            for (WebElement link : links) {
+                String url = link.getAttribute("href");
+                if(url.contains("feed") || url.contains("hashtag"))
+                    continue;
+                if (url.contains("mailto:")) {
+                    url = url.replace("mailto:","");
+                    Emailset.add(url);
+                } else {
+                    URLset.add(url);
+                }
+            }
         }
         String timeString = LocalDateTime.now().format(formatter);
-        
+
         try (FileWriter writer = new FileWriter("EmailOutput_"+ timeString +".txt");
                 BufferedWriter bw = new BufferedWriter(writer)) {
-               for (String element : Emailset) {
-                   bw.write(element);
-                   bw.newLine();
-               }
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
+                for (String element : Emailset) {
+                    bw.write(element);
+                    bw.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         try (FileWriter writer = new FileWriter("URLOutput_"+ timeString +".txt");
                 BufferedWriter bw = new BufferedWriter(writer)) {
-               for (String element : URLset) {
-                   bw.write(element);
-                   bw.newLine();
-               }
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-     driver.close();
-     
+                for (String element : URLset) {
+                    bw.write(element);
+                    bw.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        driver.close();
+
      //starting to send mails
      EmailMain main = new EmailMain();
      main.startEmailProcess();

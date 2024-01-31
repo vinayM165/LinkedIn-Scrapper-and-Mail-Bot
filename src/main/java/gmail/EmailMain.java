@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +26,7 @@ public class EmailMain {
 		 	switch (choice) {
 				case 1:
 					System.out.println("Enter the list of emails:");
-				 	List<String> list = new ArrayList<>();
+				 	HashSet<String> list = new HashSet<>();
 				 	String line;
 				 	do {
 				 	    line = scanner.nextLine();
@@ -33,23 +34,37 @@ public class EmailMain {
 				 	        list.add(line);
 				 	    }
 				 	} while (!line.isEmpty());
+				 	HashSet<String> excludeList = new HashSet<>();
+				 	System.out.println("Enter list of emails needs to be excluded if present:");
+				 	String line1;
+				 	do {
+				 	    line1 = scanner.nextLine();
+				 	    if (!line1.isEmpty()) {
+				 	        excludeList.add(line1);
+				 	    }
+				 	} while (!line1.isEmpty());
+				 		System.out.println("list : " +list.size());
+				 		System.out.println("ExcludeList : " + excludeList.size());
+				 		System.out.println("list : " +list.size());
+				 		list.removeAll(excludeList);
 					 	processing.startProcess();
 					 	System.out.println("Sending Mails");
+					 	//list.forEach(e -> System.out.println(e));
 					 	coreMailSender(list);
 					 	processing.endProcess();
-					 	System.out.println("\nMail sent");
-					 	//list.forEach(e -> System.out.println(e));
 					 	
 						break;
 				case 2:
 					System.out.println("Enter path of file : \n");
 					String path = scanner.nextLine();
-					List<String> emailLines = new ArrayList<>();
+					List<String> Lines = new ArrayList<>();
 					 try {
-						 emailLines = Files.readAllLines(Paths.get(path));
+						 Lines = Files.readAllLines(Paths.get(path));
 				        } catch (IOException e) {
 				            System.err.println("Error reading file: " + e.getMessage());
 				        }
+					 	HashSet<String> emailLines = new HashSet<>();
+					 	emailLines.addAll(Lines);
 					 	processing.startProcess();
 					 	System.out.println("Sending Mails");
 					 	coreMailSender(emailLines);
@@ -67,30 +82,16 @@ public class EmailMain {
 					startEmailProcess();
 					break;
 			}
-	
-		 	
 	    }
-	 public void coreMailSender(List<String> list) {
-		 String subject = "Application for Java Developer Role";
-		 	String body = "\nDear Hiring Manager,\r\n"
-		 			+ "\r\n"
-		 			+ "I am writing to express my interest in the Java Developer role at your company. I have nearly 2 years of experience in the field and possess hands-on knowledge of technologies such as SpringBoot, Hibernate, JUnit, SQL Server, JSP, Servlet, Core Java, Advance Java, Spring MVC and Maven. Additionally, I am familiar with Agile methodologies and have experience using tools like JIRA and Scrum board.\r\n"
-		 			+ "\r\n"
-		 			+ "In my current position, I have been responsible for developing and maintaining several web applications using the aforementioned technologies. I am fluent in English and Hindi and thrive in fast-paced, agile environments.\r\n"
-		 			+ "\r\n"
-		 			+ "Please find attached my resume for your review. I am currently serving my notice period and would be available to join your team within 15-30 days. I believe that my skills and experience make me a strong candidate for this role and I am excited at the prospect of joining your team.\r\n"
-		 			+ "\r\n"
-		 			+ "Thank you for considering my application. I look forward to the opportunity to discuss my qualifications further.\r\n"
-		 			+ "\r\n"
-		 			+ "Sincerely,\r\n"
-		 			+ "Vinay Mandge\r\n"
-		 			+ "+91 9096103432";
+	 public void coreMailSender(HashSet<String> list) {
+		 String subject = "Application for Job Role";
+		 	String body = "Enter email body";
 		 	
 		 	EmailSender sender = new EmailSender();
 		 	try {
 		 		for(String to: list)
-		 			if(!to.isBlank())
-		 			sender.sendMail("mandgevinay16@gmail.com",to,subject,body);
+		 			if(!to.isEmpty())
+		 			sender.sendMail("email-id@gmail.com",to,subject,body);//Enter email on placeholder
 		 	}catch (Exception e) {
 				throw new RuntimeException(e);
 			}
