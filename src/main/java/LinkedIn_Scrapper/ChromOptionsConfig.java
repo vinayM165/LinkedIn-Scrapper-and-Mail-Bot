@@ -1,4 +1,4 @@
-package ChromeBot;
+package LinkedIn_Scrapper;
 
 import org.openqa.selenium.chrome.ChromeOptions;
 

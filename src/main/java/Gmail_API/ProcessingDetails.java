@@ -1,4 +1,4 @@
-package gmail;
+package Gmail_API;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
