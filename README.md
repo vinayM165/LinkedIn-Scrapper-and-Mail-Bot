@@ -24,10 +24,22 @@ Before running the application, make sure you have the following prerequisites i
      4. **Keywords:** Add relevant keywords related to the job profiles you want to search for.
      5. *Optional:* Adjust page scroll count and length based on your requirements.
 
-## Usage
+These steps will create two files, one with email-ids scrapped for sending the mail and URLs which can be used to apply for job roles.
 
-Follow the steps below to run the modules:
+3. Once the Email Sender gets triggered, you can either paste email-ids directly or share the path to the file containing email-ids.
 
-1. **Start LinkedIn Email/URL Scrapping:**
-   ```bash
+4. Enter Email body/sender/receiver/subject fields in `Gmail_API.EmailMain`.
+
+5. Insert the following fields in `Gmail_API.EmailSender.java`:
+   1. Insert your email ID from which you are sending the email.
+   2. Also insert Gmail API app password that you can enable from your Google account.
+   3. Attach Cover-letter or resume if required.
+
+## Command to run the Modules:
+
+1. Start LinkedIn Email/Url Scrapping
+   ```cmd
    mvn exec:java -D exec.mainClass="LinkedIn_Scrapper.MainBot"
+
+   ```cmd
+   mvn exec:java -D exec.mainClass="Gmail_API.EmailMain"
