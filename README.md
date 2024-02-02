@@ -41,7 +41,7 @@ These steps will create two files, one with email-ids scrapped for sending the m
    ```cmd
    mvn exec:java -D exec.mainClass="LinkedIn_Scrapper.MainBot"
    ```
-# if email sender bot doesn't get triggered use below command
+## if email sender bot doesn't get triggered use below command
    ```cmd
    mvn exec:java -D exec.mainClass="Gmail_API.EmailMain"
    ```
