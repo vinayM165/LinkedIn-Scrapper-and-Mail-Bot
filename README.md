@@ -45,3 +45,5 @@ These steps will create two files, one with email-ids scrapped for sending the m
    ```cmd
    mvn exec:java -D exec.mainClass="Gmail_API.EmailMain"
    ```
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-orange?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/mvinay5)
