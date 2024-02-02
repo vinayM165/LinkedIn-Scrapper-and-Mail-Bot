@@ -22,7 +22,9 @@ public class EmailSender {
 	        
 	        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("email-id@gmail.com","*Gmail API Passkey*"); //Activate and paste gmail-api passkey
+					//Insert you email Id from which you are sending email 
+					//also insert gmail api app password that you can enable from your google account 
+	                return new PasswordAuthentication("email-id@gmail.com","*Gmail API Passkey*"); //Activate and paste gmail-app password
 	            }
 	        });
 	        

@@ -96,6 +96,10 @@ public class EmailMain {
 				throw new RuntimeException(e);
 			}
 	 }
+	 public static void main(String[] args) throws Exception {
+		EmailMain mail = new EmailMain();
+		mail.startEmailProcess() ;
+	 }
 }
 	    
 
