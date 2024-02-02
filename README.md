@@ -40,6 +40,8 @@ These steps will create two files, one with email-ids scrapped for sending the m
 1. Start LinkedIn Email/Url Scrapping
    ```cmd
    mvn exec:java -D exec.mainClass="LinkedIn_Scrapper.MainBot"
+   ```
 
    ```cmd
    mvn exec:java -D exec.mainClass="Gmail_API.EmailMain"
+   ```
