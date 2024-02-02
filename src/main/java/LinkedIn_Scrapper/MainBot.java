@@ -23,7 +23,7 @@ import Gmail_API.EmailMain;
 public class MainBot {
 
 	public static void main(String args[]) throws Exception {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\hp5pr\\Downloads\\chromedriver-win64 (1)\\chromedriver-win64\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "WebDriver/path");
 
         // Create a new instance of the ChromeDriver
 		ChromeOptions options = new ChromeOptions();
@@ -37,6 +37,7 @@ public class MainBot {
         Set<String> Emailset = new HashSet<String>();
         Set<String> URLset = new HashSet<String>();
         
+        //Insert Keywords according to Job Profile
         String str[] = {"Hiring Java developer","Looking Java developer","Looking for Java developer","Need Java developer","urgent Java developer","urgent Java developer","Java developer Immediate Joiner"};
         
         List<String> searchWords = new ArrayList<>(Arrays.asList(str));
@@ -47,11 +48,13 @@ public class MainBot {
         driver.get("https://www.linkedin.com/login");
         if(isLoginPage(driver.getCurrentUrl())){
         WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
-        emailInput.sendKeys("mandgevinay16@gmail.com");
+        //Enter your username
+        emailInput.sendKeys("Enter your email id here");
         // WebElement nextButton = driver.findElement(By.id("identifierNext"));
         // nextButton.click();
         WebElement passwordInput = driver.findElement(By.id("password"));
-        passwordInput.sendKeys("vkshimpi16599");
+        //Enter your password in below field
+        passwordInput.sendKeys("Enter your Password here");
         WebElement signInButton = driver.findElement(By.xpath("//button[@type='submit']"));
         signInButton.click();
         }
@@ -69,7 +72,7 @@ public class MainBot {
 
         //scroll down Page to get more results
         //more value of 2nd parameter more data
-        scrollDownPage(js,1);
+        scrollDownPage(js,15);
 
 
         List<WebElement> posts = driver.findElements(By.className("break-words"));
@@ -123,12 +126,12 @@ public class MainBot {
 
      //starting to send mails
      EmailMain main = new EmailMain();
-     //main.startEmailProcess();
+     main.startEmailProcess();
     }
 	
 	 private static void scrollDownPage(JavascriptExecutor js, int numScrolls) {
         for (int i = 0; i < numScrolls; i++) {
-            js.executeScript("window.scrollBy(0, 200)");
+            js.executeScript("window.scrollBy(0, 500)");
 
             try {
                 Thread.sleep(500);
