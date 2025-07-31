@@ -1,0 +1,19 @@
+# Large files
+dist/
+dist.zip
+target.zip
+*.jar
+!pom.xml
+
+# Compiled files
+target/
+*.class
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# Runtime files
+*.log
+cookies.data
