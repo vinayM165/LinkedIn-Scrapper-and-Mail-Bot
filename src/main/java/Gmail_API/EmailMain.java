@@ -84,14 +84,27 @@ public class EmailMain {
 			}
 	    }
 	 public void coreMailSender(HashSet<String> list) {
-		 String subject = "Application for Job Role";
-		 	String body = "Enter email body";
-		 	
-		 	EmailSender sender = new EmailSender();
+		 String subject = "Application for Software Testing Role | 3+ Years Experience | Aakanksha Patil – Resume Attached";
+
+		 String body = "Dear Hiring Manager,\n" +
+				 "I am writing to express my interest in software testing opportunities within your organization. With over 3+ years of experience as a QA professional at Capgemini, I bring hands-on expertise in manual and automation testing, including Functional, Regression, UI, API, and Database testing.\n" +
+				 "Key highlights:\n" +
+				 "Proficient in Selenium with Java, TestNG, Cucumber, and Postman\n" +
+				 "Experienced in Agile/Scrum, JIRA, Jenkins, and SQL\n" +
+				 "Microsoft Certified in AZ-900 Azure Fundamentals\n" +
+				 "I’ve contributed to large-scale projects involving test automation, bug tracking, and performance optimization, and I'm eager to bring the same value to your team.\n" +
+				 "Please find my resume attached. I look forward to the opportunity to discuss how I can contribute to your QA efforts.\n" +
+				 "Best regards,\n" +
+				 "Aakanksha Murlidhar Patil\n" +
+				 "\uD83D\uDCE7 aakankshapatil36@gmail.com\n" +
+				 "\uD83D\uDCDE +91 77678 45850\n" +
+				 "\uD83D\uDD17 LinkedIn";
+
+		 EmailSender sender = new EmailSender();
 		 	try {
 		 		for(String to: list)
 		 			if(!to.isEmpty())
-		 			sender.sendMail("email-id@gmail.com",to,subject,body);//Enter email on placeholder
+		 			sender.sendMail("aakankshapatil36@gmail.com",to,subject,body);//Enter email on placeholder
 		 	}catch (Exception e) {
 				throw new RuntimeException(e);
 			}

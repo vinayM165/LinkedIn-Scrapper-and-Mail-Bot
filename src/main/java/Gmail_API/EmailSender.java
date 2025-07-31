@@ -1,7 +1,6 @@
 package Gmail_API;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -24,7 +23,7 @@ public class EmailSender {
 	            protected PasswordAuthentication getPasswordAuthentication() {
 					//Insert you email Id from which you are sending email 
 					//also insert gmail api app password that you can enable from your google account 
-	                return new PasswordAuthentication("email-id@gmail.com","*Gmail API Passkey*"); //Activate and paste gmail-app password
+	                return new PasswordAuthentication("aakankshapatil36@gmail.com","ntcrvigvmblnwvei"); //Activate and paste gmail-app password
 	            }
 	        });
 	        
@@ -34,7 +33,18 @@ public class EmailSender {
 	            message.setSubject(sub);
 	           
 	            	MimeBodyPart attachmentPart = new MimeBodyPart();
-	            attachmentPart.attachFile(new File("path")); //path to attachment i.e. resume/cover letter
+				// Load resource as InputStream
+				InputStream is = getClass().getClassLoader().getResourceAsStream("Aakanksha Murlidhar Patil.pdf");
+				if (is == null) throw new FileNotFoundException("Attachment not found in resources");
+				File tempFile = File.createTempFile("attachment", ".pdf");
+				try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+					byte[] buffer = new byte[1024];
+					int bytesRead;
+					while ((bytesRead = is.read(buffer)) != -1) {
+						fos.write(buffer, 0, bytesRead);
+					}
+				}
+				attachmentPart.attachFile(tempFile);
 	            Multipart multipart = new MimeMultipart();
 	            message.setContent(multipart);
 	            MimeBodyPart messageBodyPart = new MimeBodyPart();
