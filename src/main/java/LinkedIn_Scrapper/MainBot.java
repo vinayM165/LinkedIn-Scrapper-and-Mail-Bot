@@ -17,21 +17,24 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import io.github.bonigarcia.wdm.WebDriverManager;
 import Gmail_API.EmailMain;
 
 public class MainBot {
 
 	public static void main(String args[]) throws Exception {
-		System.setProperty("webdriver.chrome.driver", "WebDriver/path");
+		// Setup ChromeDriver automatically using WebDriverManager
+        WebDriverManager.chromedriver().setup();
 
-        // Create a new instance of the ChromeDriver
-		ChromeOptions options = new ChromeOptions();
+        // Set Chrome options
+        ChromeOptions options = new ChromeOptions();
         options.addArguments("--user-data-dir=C:\\path\\to\\your\\custom\\directory");
+
+        // Create driver instance
         WebDriver driver = new ChromeDriver(options);
 
+        // Explicit wait (use Duration instead of deprecated int-based constructor)
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
         
         Set<String> Emailset = new HashSet<String>();
